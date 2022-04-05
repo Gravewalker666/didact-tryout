@@ -1,0 +1,19 @@
+{
+  "name": "didact-tryout",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gravewalker666/didact-tryout.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gravewalker666/didact-tryout/issues"
+  },
+  "homepage": "https://github.com/Gravewalker666/didact-tryout#readme"
+}
