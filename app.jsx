@@ -1,16 +1,55 @@
-const element = {
-    type: "h1",
-    props: {
-        title: "foo",
-        children: "Hello",
-    },
+function createElement(type, props, ...children) {
+    return {
+        type,
+        props: {
+            ...props,
+            children: children.map(child => {
+                typeof child !== "object" ? createTextElement(child) : child
+            }),
+        },
+    }
 }
 
-const container = document.getElementById("root");
+function createTextElement(text) {
+    return {
+        type: "TEXT_ELEMENT",
+        props: {
+            nodeValue: text,
+            children: []
+        }
+    }
+}
 
-const node = document.createElement(element.type);
-node["title"] = element.props.title;
-const text = document.createTextNode("");
-text["nodeValue"] = element.props.children;
-node.appendChild(text);
-container.appendChild(node);
+function render(element, container) {
+    const dom =
+        element.type !== "TEXT_ELEMENT"?
+            document.createElement(element.type):
+            document.createTextNode("");
+
+    const isProperty = key => key !== "children";
+    Object.keys(element.props)
+        .filter(isProperty)
+        .forEach(name => {
+           dom[name] = element.props[name];
+        });
+
+    element.props.children.forEach(child => render(child, dom));
+
+    container.appendChild(dom);
+}
+
+const Didact = {
+    createElement,
+    render,
+}
+
+/** @jsx Didact.createElement */
+const element = (
+    <div style="background: salmon">
+        <h1>Hello World</h1>
+        <h2 style="text-align:right">from Didact</h2>
+    </div>
+);
+
+const container = document.getElementById("root");
+Didact.render(element, container);
