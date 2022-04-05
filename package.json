@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "swc": "swc app.jsx -o app.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/Gravewalker666/didact-tryout/issues"
   },
-  "homepage": "https://github.com/Gravewalker666/didact-tryout#readme"
+  "homepage": "https://github.com/Gravewalker666/didact-tryout#readme",
+  "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.163"
+  }
 }
