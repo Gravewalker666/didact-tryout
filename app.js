@@ -34,7 +34,7 @@ function createElement(type, props) {
         type: type,
         props: _objectSpread({}, props, {
             children: children.map(function(child) {
-                typeof child !== "object" ? createTextElement(child) : child;
+                return typeof child === "object" ? child : createTextElement(child);
             })
         })
     };
@@ -49,7 +49,7 @@ function createTextElement(text) {
     };
 }
 function render(element1, container1) {
-    var dom = element1.type !== "TEXT_ELEMENT" ? document.createElement(element1.type) : document.createTextNode("");
+    var dom = element1.type === "TEXT_ELEMENT" ? document.createTextNode("") : document.createElement(element1.type);
     var isProperty = function(key) {
         return key !== "children";
     };
@@ -66,10 +66,8 @@ var Didact = {
     render: render
 };
 /** @jsx Didact.createElement */ var element = /*#__PURE__*/ Didact.createElement("div", {
-    style: "background: salmon"
-}, /*#__PURE__*/ Didact.createElement("h1", null, "Hello World"), /*#__PURE__*/ Didact.createElement("h2", {
-    style: "text-align:right"
-}, "from Didact"));
+    id: "foo"
+}, /*#__PURE__*/ Didact.createElement("a", null, "bar"), /*#__PURE__*/ Didact.createElement("b", null));
 var container = document.getElementById("root");
 Didact.render(element, container);
 
