@@ -61,6 +61,17 @@ function render(element1, container1) {
     });
     container1.appendChild(dom);
 }
+var nextUnitOfWork = null;
+function workLoop(deadline) {
+    var shouldYield = false;
+    while(nextUnitOfWork && !shouldYield){
+        nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
+        shouldYield = deadline.timeRemaining() < 1;
+    }
+    requestIdleCallback(workLoop);
+}
+requestIdleCallback(workLoop);
+function performUnitOfWork(nextUnitOfWork) {}
 var Didact = {
     createElement: createElement,
     render: render
